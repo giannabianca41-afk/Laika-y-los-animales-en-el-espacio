@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrera Espacial: Laika y los animales en el espacio</title>
+  <meta name="description" content="Una aventura interactiva para comprender la historia de Laika, la Guerra Fría y el papel de los animales en la exploración espacial.">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Background Stars Animation -->
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- Progress Indicators -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <div class="nav-controls" id="nav-controls">
+    <div class="nav-dot active" data-slide="0" title="Portada"></div>
+    <div class="nav-dot" data-slide="1" title="Fuentes Históricas"></div>
+    <div class="nav-dot" data-slide="2" title="Cronología"></div>
+    <div class="nav-dot" data-slide="3" title="Misión Sputnik II"></div>
+    <div class="nav-dot" data-slide="4" title="Impacto y Juego"></div>
+    <div class="nav-dot" data-slide="5" title="Dilemas Éticos"></div>
+    <div class="nav-dot" data-slide="6" title="Quiz de Conocimientos"></div>
+    <div class="nav-dot" data-slide="7" title="Despedida"></div>
+  </div>
+
+  <!-- Story Scrollytelling Container -->
+  <div id="story-container">
+
+    <!-- Card 1: Portada -->
+    <section class="slide active" id="slide-0">
+      <div class="glass-panel">
+        <div class="hero-content">
+          <h1>Carrera Espacial</h1>
+          <h3 class="highlight-cyan">Laika y los Animales en el Espacio</h3>
+          <p class="hero-subtitle">
+            A través de esta aventura interactiva, te invitamos a conocer la historia de <strong>Laika</strong>, una perra callejera que se convirtió en el primer ser vivo en entrar en órbita. ¿Estás listo para viajar en el tiempo?
+          </p>
+
+          <div class="cold-war-context">
+            <h4 class="highlight-violet" style="font-family: var(--font-title); font-size: 1.1rem; margin-bottom: 0.5rem;">El Escenario: La Guerra Fría</h4>
+            <p style="font-size: 0.9rem;">
+              Tras la Segunda Guerra Mundial, la tensión ideológica entre la <strong>URSS</strong> (comunismo) y los <strong>EE. UU.</strong> (capitalismo) desató una competencia frenética por la superioridad tecnológica y armamentista. La conquista del espacio exterior se convirtió en la prueba máxima de dominio científico y geopolítico mundial.
+            </p>
+          </div>
+
+          <button class="btn" id="start-btn">
+            Comenzar Aventura
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 2: Fuentes Históricas -->
+    <section class="slide" id="slide-1">
+      <div class="glass-panel">
+        <div>
+          <h2>Fuentes Históricas</h2>
+          <p>Explora cómo la prensa mundial y los archivos registraron este hito histórico en noviembre de 1957. Coloca el cursor sobre las tarjetas para voltearlas y leer los detalles.</p>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Card Press UK -->
+          <div class="flip-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="newspaper-header">The Guardian — 4 Nov 1957</div>
+                <div class="newspaper-title">"Space travel comes true"</div>
+                <div class="newspaper-meta">Prensa Internacional (Reino Unido)</div>
+                <div class="card-hint">Haz hover para voltear ↻</div>
+              </div>
+              <div class="card-back">
+                <h4 class="highlight-cyan">El Asombro Científico</h4>
+                <p style="font-size: 0.9rem; line-height: 1.5;">
+                  Publicado al día siguiente del lanzamiento. Refleja la inmensa sorpresa mundial de que la URSS lograra poner en órbita un satélite de media tonelada con un ser vivo dentro. Los científicos internacionales expresaron admiración tecnológica mezclada con las primeras dudas biológicas sobre si el animal podría sobrevivir en condiciones de gravedad cero.
+                </p>
+                <div class="newspaper-meta">Impacto: Hito Tecnológico Global</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Press LatAm -->
+          <div class="flip-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="newspaper-header">La Nación — 10 Nov 1957</div>
+                <div class="newspaper-title">"¿Volverá viva o muerta?"</div>
+                <div class="newspaper-meta">Prensa Latinoamericana (Chile)</div>
+                <div class="card-hint">Haz hover para voltear ↻</div>
+              </div>
+              <div class="card-back">
+                <h4 class="highlight-violet">El Suspenso y la Tensión</h4>
+                <p style="font-size: 0.9rem; line-height: 1.5;">
+                  La portada chilena refleja la angustia pública sobre el destino de Laika. Al mismo tiempo, expone noticias sobre la carrera armamentista y los ensayos de cohetes intercontinentales. Demuestra cómo la hazaña científica estaba intrínsecamente ligada al pánico nuclear y al uso propagandístico del satélite Sputnik II por la URSS.
+                </p>
+                <div class="newspaper-meta">Impacto: Tensión en la Guerra Fría</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-nav-buttons">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 3: Cronología -->
+    <section class="slide" id="slide-2">
+      <div class="glass-panel">
+        <div>
+          <h2>Línea de Tiempo Espacial</h2>
+          <p>Antes del vuelo humano, decenas de animales pavimentaron el camino. Explora las misiones clave:</p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Timeline Nav Buttons -->
+          <div class="timeline-nav-wrapper">
+            <div class="timeline-nav">
+              <div class="timeline-line"></div>
+              <button class="timeline-node active" data-year="1948">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1948</div>
+              </button>
+              <button class="timeline-node" data-year="1949">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1949</div>
+              </button>
+              <button class="timeline-node" data-year="1950">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1950</div>
+              </button>
+              <button class="timeline-node" data-year="1951">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1951</div>
+              </button>
+              <button class="timeline-node" data-year="1957">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1957</div>
+              </button>
+              <button class="timeline-node" data-year="1960">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1960</div>
+              </button>
+              <button class="timeline-node" data-year="1966">
+                <div class="timeline-node-dot"></div>
+                <div class="timeline-node-year">1966</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Card -->
+          <div class="timeline-content-card" id="timeline-detail-card">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <h3 id="timeline-title" class="highlight-cyan">Albert I</h3>
+              <span id="timeline-nation" class="highlight-gold" style="font-family: var(--font-mono); font-size: 0.9rem;">EE. UU.</span>
+            </div>
+            <p id="timeline-text">
+              Primer primate rhesus enviado al espacio en un cohete V-2 capturado a Alemania. Lamentablemente falleció por asfixia mecánica durante el vuelo.
+            </p>
+            <div class="timeline-meta-grid">
+              <div class="timeline-meta-item">
+                <span class="timeline-meta-label">Vehículo</span>
+                <span class="timeline-meta-value" id="timeline-vehicle">Cohete V-2</span>
+              </div>
+              <div class="timeline-meta-item">
+                <span class="timeline-meta-label">Resultado</span>
+                <span class="timeline-meta-value" id="timeline-status">Fallecimiento</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stray Dogs Details -->
+          <div style="background: rgba(255, 255, 255, 0.02); border-radius: 10px; padding: 1rem; border-left: 3px solid var(--violet);">
+            <h4 class="highlight-violet" style="font-family: var(--font-title); font-size: 1rem; margin-bottom: 0.4rem;">¿Por qué perros callejeros?</h4>
+            <p style="font-size: 0.85rem; line-height: 1.5;">
+              La URSS prefirió utilizar perros callejeros en lugar de monos. Creían que eran más resistentes al hambre, al frío y al estrés del encierro. Además, se seleccionaron únicamente <strong>hembras</strong> de tamaño pequeño por razones prácticas: el diseño del traje espacial y el sistema de recolección de residuos (que canalizaba las necesidades fisiológicas) eran mucho más sencillos para ellas en espacios ultra-reducidos.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide-nav-buttons">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 4: Sputnik II Mission -->
+    <section class="slide" id="slide-3">
+      <div class="glass-panel">
+        <div>
+          <h2>La Misión Sputnik II</h2>
+          <p>Explora la bitácora técnica de la misión del 3 de noviembre de 1957. Pasa el cursor por los puntos interactivos del satélite para examinar sus secciones.</p>
+        </div>
+
+        <div class="split-layout">
+          <!-- Text Log Section -->
+          <div class="mission-log">
+            <div class="log-entry">
+              <span class="highlight-cyan" style="display: block; font-size: 0.8rem; margin-bottom: 0.2rem;">LOG // 07:22 MOSCÚ</span>
+              <strong>El Lanzamiento:</strong> Sputnik II despega con éxito. La cabina cuenta con control térmico automático, comida gelatinizada y un ventilador de enfriamiento.
+            </div>
+            <div class="log-entry">
+              <span class="highlight-violet" style="display: block; font-size: 0.8rem; margin-bottom: 0.2rem;">LOG // ÓRBITAS 1 - 3</span>
+              <strong>Fisiología:</strong> El pulso cardíaco de Laika sube al triple debido al miedo extremo del despegue, tardando más del triple de tiempo normal en calmarse.
+            </div>
+            <div class="log-entry" style="border-left-color: var(--red);">
+              <span class="highlight-gold" style="display: block; font-size: 0.8rem; margin-bottom: 0.2rem;">LOG // ÓRBITA 4</span>
+              <strong>Fallo Crítico:</strong> Un error de separación de la sonda provoca que el sistema térmico falle. La cabina sube a 40 °C. Laika fallece por hipertermia y fatiga tras pocas horas de vuelo.
+            </div>
+            <div class="log-entry" style="border-left-color: var(--text-muted);">
+              <span class="highlight-cyan" style="display: block; font-size: 0.8rem; margin-bottom: 0.2rem;">LOG // VERDAD HISTÓRICA</span>
+              <strong>El Secreto:</strong> Diseñado en solo 4 semanas por orden de Nikita Kruschov, no había tecnología de reentrada. La URSS ocultó el fallo térmico por décadas, afirmando falsamente que Laika sobrevivió varios días y recibió eutanasia pacífica.
+            </div>
+          </div>
+
+          <!-- Interactive Satellite Model -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <div class="capsule-interactive">
+              <div class="capsule-svg-wrapper">
+                <svg viewBox="0 0 100 120" width="100%" height="100%">
+                  <!-- Antennae -->
+                  <line x1="20" y1="20" x2="40" y2="45" stroke="var(--cyan)" stroke-width="1.5" />
+                  <line x1="80" y1="20" x2="60" y2="45" stroke="var(--cyan)" stroke-width="1.5" />
+                  <line x1="10" y1="80" x2="35" y2="70" stroke="var(--cyan)" stroke-width="1.5" />
+                  <line x1="90" y1="80" x2="65" y2="70" stroke="var(--cyan)" stroke-width="1.5" />
+                  
+                  <!-- Main Capsule structure -->
+                  <!-- Top Instrument dome -->
+                  <path d="M 35 45 Q 50 25 65 45 Z" fill="rgba(0, 242, 254, 0.15)" stroke="var(--cyan)" stroke-width="2" />
+                  
+                  <!-- Middle cylinder -->
+                  <rect x="35" y="45" width="30" height="25" fill="rgba(157, 78, 221, 0.15)" stroke="var(--violet)" stroke-width="2" />
+                  
+                  <!-- Bottom chamber (Laika capsule) -->
+                  <path d="M 35 70 L 40 100 Q 50 110 60 100 L 65 70 Z" fill="rgba(255, 215, 0, 0.1)" stroke="var(--gold)" stroke-width="2" />
+                  
+                  <!-- Dog outline placeholder representation inside chamber -->
+                  <circle cx="50" cy="85" r="7" fill="rgba(255, 255, 255, 0.1)" stroke="var(--text-muted)" stroke-width="1" />
+                  <path d="M 45 92 Q 50 97 55 92" fill="none" stroke="var(--text-muted)" stroke-width="1" />
+                </svg>
+              </div>
+
+              <!-- Hotspot Buttons -->
+              <div class="capsule-hotspot" style="top: 30%; left: 50%;" data-tooltip="Cúpula de Instrumentos: Transmisores de radio y sensores de radiación espacial en la punta."></div>
+              <div class="capsule-hotspot" style="top: 55%; left: 50%;" data-tooltip="Sistema de Soporte de Vida: Regenerador de oxígeno y absorbente de dióxido de carbono."></div>
+              <div class="capsule-hotspot" style="top: 78%; left: 50%;" data-tooltip="Cabina de Laika: Presurizada, acolchada, con sensores biométricos en su arnés y ventilador térmico."></div>
+
+              <div class="capsule-tooltip" id="capsule-tooltip-box">Haz click en los puntos para leer</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Diagrama esquemático de Sputnik II</span>
+          </div>
+        </div>
+
+        <div class="slide-nav-buttons">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 5: Impact & Game -->
+    <section class="slide" id="slide-4">
+      <div class="glass-panel">
+        <div>
+          <h2>Impacto y Consecuencias</h2>
+          <p>
+            El sacrificio de Laika aceleró la exploración espacial. El registro de sus signos vitales probó que un organismo superior podía sobrevivir a la microgravedad, lo que posibilitó el vuelo orbital de <strong>Yuri Gagarin</strong> en 1961. En EE. UU., el impacto geopolítico impulsó la creación de la <strong>NASA</strong> en 1958.
+          </p>
+          <blockquote style="font-style: italic; border-left: 2px solid var(--gold); padding-left: 1rem; margin: 0.8rem 0; font-size: 0.9rem; color: var(--text-muted);">
+            "Cuanto más tiempo pasa, más lamento lo sucedido... No debimos hacerlo. No aprendimos lo suficiente de esta misión como para justificar la muerte de la perra."
+            <span style="display: block; text-align: right; font-style: normal; font-size: 0.8rem; color: var(--gold);">— Oleg Gazenko, científico principal del proyecto</span>
+          </blockquote>
+        </div>
+
+        <!-- Interactive Game Section -->
+        <div class="game-container">
+          <span class="highlight-cyan" style="font-family: var(--font-title); font-size: 1.1rem; font-weight: 600;">Minijuego: El Viaje Orbital de Laika</span>
+          
+          <div class="game-canvas-wrapper">
+            <canvas id="game-canvas" width="600" height="250"></canvas>
+            
+            <div class="game-overlay" id="game-overlay">
+              <span class="game-title" id="game-title">Laika's Space Run</span>
+              <span class="game-score-display" id="game-overlay-score">Puntuación: 0</span>
+              <button class="btn btn-gold" id="game-start-btn">Iniciar Vuelo</button>
+              <span class="game-controls-hint">Presiona [BARRA ESPACIADORA] o haz CLICK en la pantalla para saltar obstáculos</span>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 2rem; font-family: var(--font-mono); font-size: 0.9rem; justify-content: center; width: 100%;">
+            <span>PUNTOS: <span id="game-score" class="highlight-cyan">0</span></span>
+            <span>RÉCORD: <span id="game-highscore" class="highlight-gold">0</span></span>
+          </div>
+        </div>
+
+        <div class="slide-nav-buttons">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 6: Ethics Dilemma -->
+    <section class="slide" id="slide-5">
+      <div class="glass-panel">
+        <div>
+          <h2>Relación con el Presente: Dilemas Éticos</h2>
+          <p>
+            ¿Hasta qué punto justifica el avance científico el sufrimiento animal? Aunque hoy en día no enviamos animales en misiones suicidas al espacio, las pruebas biomédicas y de la industria de consumo persisten globalmente.
+          </p>
+        </div>
+
+        <div class="slider-container">
+          <span class="highlight-cyan" style="font-family: var(--font-title); font-size: 1.1rem; font-weight: 500;">
+            Desliza para calibrar tu perspectiva de balance ético:
+          </span>
+          
+          <div class="slider-wrapper">
+            <input type="range" min="0" max="100" value="50" class="ethics-slider" id="ethics-slider">
+            <div class="slider-labels">
+              <span>PRIORIDAD: ÉTICA Y BIENESTAR ANIMAL</span>
+              <span>PRIORIDAD: PROGRESO CIENTÍFICO</span>
+            </div>
+          </div>
+
+          <div class="ethics-reflection-card" id="ethics-reflection-card">
+            <p id="ethics-reflection-text" style="font-size: 1rem; color: var(--text-main);">
+              Mueve el deslizador superior para explorar diferentes análisis y posturas éticas sobre la experimentación animal.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="highlight-cyan" style="font-family: var(--font-title); font-size: 1.1rem; margin-bottom: 0.4rem;">Alternativas Científicas Modernas</h4>
+          <p style="font-size: 0.9rem;">
+            Hoy en día, las simulaciones computacionales avanzadas, los cultivos celulares tridimensionales <em>in vitro</em> y los microchips de órganos emulados reducen la necesidad de utilizar seres sintientes, demostrando que la tecnología moderna y la compasión pueden avanzar juntas.
+          </p>
+        </div>
+
+        <div class="slide-nav-buttons">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 7: Quiz -->
+    <section class="slide" id="slide-6">
+      <div class="glass-panel">
+        <div>
+          <h2>¡Pon a prueba tus conocimientos!</h2>
+          <p>Veamos cuánto has aprendido en esta misión por el espacio y la historia.</p>
+        </div>
+
+        <div class="quiz-wrapper" id="quiz-wrapper">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem;">
+            <span class="quiz-progress-text" id="quiz-progress-text">Pregunta 1 de 5</span>
+            <span class="highlight-cyan" style="font-family: var(--font-mono); font-size: 0.9rem;">Puntos: <span id="quiz-current-score">0</span></span>
+          </div>
+
+          <div class="quiz-question-box" id="quiz-question-text">
+            ¿Cuál fue la causa real del deceso de Laika en órbita?
+          </div>
+
+          <div class="quiz-options" id="quiz-options-box">
+            <!-- Dynamic Buttons will render here -->
+          </div>
+
+          <div class="quiz-explanation" id="quiz-explanation-box" style="display: none;">
+            <!-- Explanation will render here -->
+          </div>
+
+          <button class="btn" id="quiz-next-btn" style="align-self: flex-end; display: none;">Siguiente Pregunta</button>
+        </div>
+
+        <!-- Result Screen Hidden by Default -->
+        <div class="quiz-results-screen" id="quiz-results-screen" style="display: none;">
+          <h3 class="highlight-cyan" style="font-size: 1.8rem;">Evaluación de Misión Completada</h3>
+          <p>Has respondido correctamente <strong id="quiz-correct-count">0</strong> de 5 preguntas.</p>
+          
+          <div class="badge-container">
+            <div class="badge-glow"></div>
+            <div class="badge-icon" id="badge-icon">🚀</div>
+          </div>
+          
+          <h4 id="badge-rank-title" class="highlight-gold" style="font-size: 1.4rem; font-family: var(--font-title);">Piloto Espacial</h4>
+          <p id="badge-rank-desc" style="max-width: 500px; font-size: 0.95rem;">
+            ¡Gran trabajo! Tienes un entendimiento sólido del viaje de Laika y el contexto histórico de la carrera espacial.
+          </p>
+
+          <button class="btn btn-secondary" id="quiz-restart-btn">Reiniciar Cuestionario</button>
+        </div>
+
+        <div class="slide-nav-buttons" id="quiz-nav-footer">
+          <button class="btn btn-secondary prev-slide-btn">Atrás</button>
+          <button class="btn next-slide-btn" id="quiz-skip-btn">Saltar Quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 8: Despedida -->
+    <section class="slide" id="slide-7">
+      <div class="glass-panel">
+        <div class="hero-content">
+          <span style="font-size: 4rem; animation: float 3s infinite ease-in-out;">🛸</span>
+          <h1>¡Misión Cumplida!</h1>
+          <h3 class="highlight-cyan">Gracias por viajar con nosotras</h3>
+          <p class="hero-subtitle">
+            Esperamos que esta travesía interactiva te haya ayudado a comprender la complejidad del viaje orbital de Laika, su impacto científico e ideológico en la Guerra Fría y el debate ético que continúa vigente en el presente.
+          </p>
+          <p style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--gold); margin-top: 1rem;">
+            "A través de las estrellas, guardamos su memoria."
+          </p>
+
+          <button class="btn btn-gold" id="restart-all-btn" style="margin-top: 2rem;">
+            Volver al Principio
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
