@@ -51,6 +51,206 @@ resizeCanvas();
 requestAnimationFrame(drawStars);
 
 
+// --- AUDIO SYNTHESIZER (Web Audio API) ---
+let audioMuted = false;
+
+const AudioSynth = {
+  ctx: null,
+
+  init() {
+    if (!this.ctx) {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+
+  playClick() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.08);
+  },
+
+  playRadar() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(300, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.2);
+
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
+  },
+
+  playChirp() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    
+    [0, 0.06].forEach(delay => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(1000, now + delay);
+      osc.frequency.setValueAtTime(1500, now + delay + 0.03);
+      
+      gain.gain.setValueAtTime(0.02, now + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.05);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + delay);
+      osc.stop(now + delay + 0.05);
+    });
+  },
+
+  playJump() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(150, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.15);
+
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15);
+  },
+
+  playCrash() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(60, ctx.currentTime + 0.4);
+
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.4);
+  },
+
+  playCorrect() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.08);
+      
+      gain.gain.setValueAtTime(0.06, now + i * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.25);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.08);
+      osc.stop(now + i * 0.08 + 0.25);
+    });
+  },
+
+  playIncorrect() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc1.type = 'sawtooth';
+    osc2.type = 'sawtooth';
+    
+    osc1.frequency.setValueAtTime(185, now);
+    osc2.frequency.setValueAtTime(196, now);
+    osc1.frequency.linearRampToValueAtTime(120, now + 0.3);
+    osc2.frequency.linearRampToValueAtTime(120, now + 0.3);
+    
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc1.start();
+    osc2.start();
+    osc1.stop(now + 0.3);
+    osc2.stop(now + 0.3);
+  },
+
+  playFanfare() {
+    if (audioMuted) return;
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    
+    const freqs = [261.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+    freqs.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now + i * 0.1);
+      
+      gain.gain.setValueAtTime(0.07, now + i * 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.4);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.1);
+      osc.stop(now + i * 0.1 + 0.4);
+    });
+  }
+};
+
 // --- SLIDE NAVIGATION SYSTEM ---
 const slides = document.querySelectorAll('.slide');
 const navDots = document.querySelectorAll('.nav-dot');
@@ -59,6 +259,9 @@ let currentSlideIndex = 0;
 
 function showSlide(index) {
   if (index < 0 || index >= slides.length) return;
+
+  // Play navigation transition sound
+  AudioSynth.playClick();
 
   // Deactivate current slide
   slides[currentSlideIndex].classList.remove('active');
@@ -78,6 +281,28 @@ function showSlide(index) {
     stopGame();
   }
 }
+
+// Sound Toggle logic
+const soundToggleBtn = document.getElementById('sound-toggle-btn');
+soundToggleBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  audioMuted = !audioMuted;
+  if (audioMuted) {
+    soundToggleBtn.classList.add('muted');
+    soundToggleBtn.querySelector('span').textContent = '🔇';
+  } else {
+    soundToggleBtn.classList.remove('muted');
+    soundToggleBtn.querySelector('span').textContent = '🔊';
+    AudioSynth.playClick();
+  }
+});
+
+// Flip card hover sound bind
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    AudioSynth.playClick();
+  });
+});
 
 // Navigation Event Listeners
 document.getElementById('start-btn').addEventListener('click', () => showSlide(1));
@@ -213,6 +438,7 @@ const timelineStatus = document.getElementById('timeline-status');
 
 timelineNodes.forEach(node => {
   node.addEventListener('click', () => {
+    AudioSynth.playRadar(); // play timeline radar pitch sweep
     timelineNodes.forEach(n => n.classList.remove('active'));
     node.classList.add('active');
 
@@ -241,6 +467,7 @@ const tooltipBox = document.getElementById('capsule-tooltip-box');
 hotspots.forEach(hotspot => {
   hotspot.addEventListener('click', (e) => {
     e.stopPropagation();
+    AudioSynth.playChirp(); // play computer chirping scan sound
     const tooltipText = hotspot.getAttribute('data-tooltip');
     tooltipBox.textContent = tooltipText;
     tooltipBox.classList.add('active');
@@ -297,6 +524,7 @@ let obstacleSpawnRate = 110;
 let gameSpeed = 3.5;
 
 function startGame() {
+  AudioSynth.playRadar(); // play start swipe sound
   gameRunning = true;
   gameScore = 0;
   gameFrame = 0;
@@ -323,6 +551,7 @@ function stopGame() {
 }
 
 function gameOver() {
+  AudioSynth.playCrash(); // play crash sound
   gameRunning = false;
   clearInterval(gameInterval);
   
@@ -342,6 +571,7 @@ function gameOver() {
 function handleJump() {
   if (!gameRunning) return;
   if (!laika.isJumping) {
+    AudioSynth.playJump(); // play cute jump sound
     laika.vy = JUMP_FORCE;
     laika.isJumping = true;
   }
@@ -514,8 +744,17 @@ function updateEthicsText(value) {
   }
 }
 
+let lastSliderCategory = 1; // initial category for value 50 (index 1)
 ethicsSlider.addEventListener('input', (e) => {
-  updateEthicsText(parseInt(e.target.value));
+  const val = parseInt(e.target.value);
+  updateEthicsText(val);
+  
+  // Quick click beep when changing perspectives
+  const catIdx = ethicsPerspectives.findIndex(p => val >= p.range[0] && val <= p.range[1]);
+  if (catIdx !== lastSliderCategory) {
+    lastSliderCategory = catIdx;
+    AudioSynth.playChirp(); // play quick indicator sweep
+  }
 });
 
 // Initialize with default slider value
@@ -632,9 +871,11 @@ function selectAnswer(selectedIdx) {
     optionButtons[selectedIdx].classList.add('correct');
     quizScore++;
     quizCurrentScore.textContent = quizScore;
+    AudioSynth.playCorrect(); // play success tone
   } else {
     optionButtons[selectedIdx].classList.add('incorrect');
     optionButtons[currentQ.correct].classList.add('correct');
+    AudioSynth.playIncorrect(); // play fail tone
   }
   
   // Disable all options
@@ -658,6 +899,7 @@ function handleNextQuestion() {
 }
 
 function showResults() {
+  AudioSynth.playFanfare(); // play major space fanfare chord
   quizWrapper.style.display = 'none';
   quizNavFooter.style.display = 'none';
   quizResultsScreen.style.display = 'flex';

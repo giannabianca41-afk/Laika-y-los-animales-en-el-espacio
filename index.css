@@ -167,6 +167,41 @@ strong {
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
+/* Sound Toggle Button */
+.sound-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  background: rgba(15, 15, 28, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-glow);
+  color: var(--cyan);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sound-toggle:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan-glow);
+  transform: scale(1.08);
+}
+
+.sound-toggle.muted {
+  color: var(--text-muted);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
 /* Navigation Controls */
 .nav-controls {
   position: fixed;
