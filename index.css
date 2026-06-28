@@ -957,3 +957,33 @@ strong {
   0%, 100% { transform: translate(-50%, 0); }
   50% { transform: translate(-50%, -8px); }
 }
+
+/* Sputnik Tab Switcher Styles */
+.sputnik-tabs {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.btn-tab {
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  padding: 0.5rem 1rem !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-muted) !important;
+}
+
+.btn-tab:hover {
+  border-color: var(--cyan) !important;
+  color: var(--cyan) !important;
+}
+
+.btn-tab.active {
+  border-color: var(--cyan) !important;
+  color: var(--cyan) !important;
+  background: rgba(0, 242, 254, 0.08) !important;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2) !important;
+}
+
